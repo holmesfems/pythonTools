@@ -207,21 +207,23 @@ def doplot(plots,option):
 
 #x=0.5 , 1.0 , 3.0 , 5.0
 def main(argv):
-    option={}
-    #option.update({'subplot':111})
-    option.update({'xlabel':None})
-    option.update({'ylabel':'y'})
-    option.update({'xlim':None})
-    option.update({'ylim':None})
-    option.update({'title':None})
-    option.update({'yplot':None})
-    option.update({'xticks':None})
-    option.update({'yticks':None})
-    option.update({'xscale':None})
-    option.update({'yscale':None})
-    option.update({'save':None})
-    option.update({'commentInv':'false'})
-    option.update({'linewidth':None})
+    option=
+    {
+        #'subplot':111,
+        'xlabel':None,
+        'ylabel':'y',
+        'xlim':None,
+        'ylim':None,
+        'title':None,
+        'yplot':None,
+        'xticks':None,
+        'yticks':None,
+        'xscale':None,
+        'yscale':None,
+        'save':None,
+        'commentInv':'false',
+        'linewidth':None
+    }
     #option.update({'xticks_minor':None}) #not available
     #option.update({'yticks_minor':None})
     if len(argv)>1:
