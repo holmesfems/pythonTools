@@ -207,8 +207,7 @@ def doplot(plots,option):
 
 #x=0.5 , 1.0 , 3.0 , 5.0
 def main(argv):
-    option=
-    {
+    option={
         #'subplot':111,
         'xlabel':None,
         'ylabel':'y',
