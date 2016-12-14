@@ -1,12 +1,19 @@
 python's plotting tools
 
 usage:
+
     If you want to plot data for x-y1,y2...yn at one chart,just use plotfile_mal.py.
+
 command:
-    python plotfile_mal.py ([FILENAME](*value)?)+ [OPTION_key=VALUE]*
+
+    python plotfile_mal.py FILENAME OPTION_key=VALUE
+
 example:
+
     python plotfile_mal.py plot1.list plot2.list
+
 format of datafile:
+
     Line begin with '!' is the title line,and will be the title of each variable.
 
     Note that if the files have different name of variable X,the final name will be that
