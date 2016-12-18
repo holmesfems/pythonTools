@@ -7,6 +7,8 @@
 #setunit cd=1.0 luminosity
 %J=%kg*%m^2/%sec^2
 %C=%A*%sec
+%N=%kg*%m/%sec^2
+%V=%J/%C
 
 math.pi=3.1415926535897
 
@@ -32,6 +34,7 @@ atom.mH=1.007825*atom.u
 quantum.k=1.38064852*10^-23*%J/%K
 quantum.h=6.626070040*10^-34*%J*%sec
 quantum.e=1.6021766208*10^-19*%C
+%eV=quantum.e*%V
 quantum.hbar=quantum.h/(2*math.pi)
-quantum.mMu=105.6583666838*1*10^6*quantum.e/astro.c0^2
+quantum.mMu=105.6583666838*1*10^6*%eV/astro.c0^2
 quantum.mE=9.1093835611*10^-31*%kg
