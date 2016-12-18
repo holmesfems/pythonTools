@@ -23,6 +23,27 @@ For examples:
 
     1+2
 
+Set value of variable x as 1.0:
+
+    x=1.0
+
+Add a unit 't' in type of mass:
+
+    #setUnit t=1000 mass
+
+Change the default unit to show mass:
+
+    #setDefault t mass
+
+Read commands in file:
+
+    #read filename
+
+Get the value of an unit 'ABC':
+
+    %ABC
+
+
 ##Requirement
 libreadline 6
 
