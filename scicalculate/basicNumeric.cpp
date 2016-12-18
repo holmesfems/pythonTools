@@ -659,7 +659,7 @@ AnalyzeToken* searchToken(const std::string& name)
 void addValueToken(const std::string& tokenName,PhyValue value)
 {
     std::vector<std::string> splcmds=strSplit(tokenName,".");
-    if(splcmds.size()==1&&splcmds[0].c_str()[0]=='%')
+    if((splcmds.size()==1)&&(splcmds[0].c_str()[0]=='%'))
     {
         std::string newtokenName;
         newtokenName=splcmds[0].substr(1,splcmds[0].length()-1);
@@ -1215,10 +1215,18 @@ void setBaseUnit(std::string& unitName,std::string& typeName,double value)
             pbu->setValue(value);
         }
     }
-    ValueTree* toAdd=new ValueTree(PhyValue(value,PhyUnit(typeName)));
-    AnalyzeToken* newToken=new AnalyzeToken(unitName,toAdd);
-    _unittoken.push_back(newToken);
-
+    AnalyzeToken* hit=NULL;
+    if((hit=searchTokenFromVector(unitName,_unittoken))==NULL)
+    {
+        ValueTree* toAdd=new ValueTree(PhyValue(value,PhyUnit(typeName)));
+        AnalyzeToken* newToken=new AnalyzeToken(unitName,toAdd);
+        _unittoken.push_back(newToken);
+    }
+    else
+    {
+        ValueTree* vt=(ValueTree*)(hit->content);
+        vt->changeValue(PhyValue(value,PhyUnit(typeName)));
+    }
 }
 
 int readScript(std::string filename);
