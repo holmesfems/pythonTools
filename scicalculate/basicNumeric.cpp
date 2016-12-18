@@ -93,11 +93,13 @@ PhyBaseUnit* PhyBaseUnitDict::searchByIndex(int index)
 
 int PhyBaseUnitDict::changeDefault(const std::string& defaultUnit)
 {
-    _defaultUnit=this->searchByName(defaultUnit);
-    if(_defaultUnit==NULL)
+    PhyBaseUnit* newDefault;
+    newDefault=this->searchByName(defaultUnit);
+    if(newDefault==NULL)
     {
         return 1;
     }
+    _defaultUnit=newDefault;
     return 0;
 }
 
@@ -1277,7 +1279,11 @@ int seperateCmd(std::string& cmd)
                 pbud=_phyTypeDict->searchDictByName(typeName);
                 if(pbud!=NULL)
                 {
-                    pbud->changeDefault(unitName);
+                    if(pbud->changeDefault(unitName))
+                    {
+                        std::cout <<"unit '"<<unitName<<"' doesn't exists in type '"<<typeName<<"'\n";
+                        return 10;
+                    }
                     std::cout << "Change default unit of " << typeName << " to: " << unitName << std::endl;
                     return 4;
                 }
