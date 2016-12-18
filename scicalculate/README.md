@@ -53,7 +53,9 @@ c++11
 
 ##Licence
 Copyright (c) 2016 holmesfems
+
 Released under MIT license
+
 (http://opensource.org/licenses/mit-license.php)
 
 ##Author
