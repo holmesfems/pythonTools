@@ -1038,12 +1038,12 @@ AnalyzeTree* makeTree(std::string command)
         }
     }
     //seperate +-
-    std::regex pm(R"(\+|-)");
+    std::regex pm(R"((\+|-)+[^\+-]*$)");
     matches=regex_searchOne(pm,cmd2);
     if(matches.size()==1)
     {
         std::vector<AnalyzeTree*> trees;
-        std::vector<std::string> sep=strsep(cmd2,matches[0]->position(0),matches[0]->length(0));
+        std::vector<std::string> sep=strsep(cmd2,matches[0]->position(0),1);
         std::regex dualoperator(R"(((\*|/)|\^)$)");
 #ifdef DEBUG
         std::cout << "sep0:" << sep[0] << std::endl;
@@ -1075,7 +1075,7 @@ AnalyzeTree* makeTree(std::string command)
             std::cout << "newname is:" << newname.str() << std::endl;
             std::cout << "trees has made:" << trees.size() << std::endl;
 #endif
-            AnalyzeTree* newTree = new AnalyzeTree(trees,matches[0]->str());
+            AnalyzeTree* newTree = new AnalyzeTree(trees,matches[0]->str().substr(0,1));
             addToken(newname.str(),newTree);
             newcmd << sep[0] << newname.str() << sep[1].substr(match2[0]->length(),sep[1].length()-match2[0]->length());
 #ifdef DEBUG
@@ -1085,7 +1085,7 @@ AnalyzeTree* makeTree(std::string command)
         }
         trees.push_back(makeTree(sep[0]));
         trees.push_back(makeTree(sep[1]));
-        std::string coperator=matches[0]->str();
+        std::string coperator=matches[0]->str().substr(0,1);
         return new AnalyzeTree(trees,coperator);
     }
     //seperate *,/
