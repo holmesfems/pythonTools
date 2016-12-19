@@ -11,6 +11,7 @@
 #include<exception>
 #include<cmath>
 #include<fstream>
+#include<sstream>
 //#define DEBUG
 #define MAIN1
 //new type of exception that will be thrown when an error occured
