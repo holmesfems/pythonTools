@@ -4,7 +4,7 @@
 #setUnit K=1.0 temperature
 #setUnit A=1.0 current
 #setUnit mol=1.0 substance_quantity
-#setunit cd=1.0 luminosity
+#setUnit cd=1.0 luminosity
 %J=%kg*%m^2/%sec^2
 %C=%A*%sec
 %N=%kg*%m/%sec^2

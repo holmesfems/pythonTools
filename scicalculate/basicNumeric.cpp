@@ -597,7 +597,7 @@ AnalyzeToken* searchTokenFromVector(const std::string& name,std::vector<AnalyzeT
 }
 
 //search a token from all vectors
-AnalyzeToken* searchToken(const std::string& name)
+AnalyzeToken* searchToken(const std::string& name,int option=0)
 {
     AnalyzeToken* result;
 #ifdef DEBUG
@@ -614,13 +614,16 @@ AnalyzeToken* searchToken(const std::string& name)
             return result;
         if((result=searchTokenFromVector(name,_savetoken))!=NULL)
             return result;
-        for(auto item:_analyzeTokenVectorDict.getDict())
+        if(option==0)
         {
+            for(auto item:_analyzeTokenVectorDict.getDict())
+            {
             if((result=searchTokenFromVector(name,(item.to)))!=NULL)
                 return result;
-        }
-        if((result=searchTokenFromVector(name,_unittoken))!=NULL)
+            }
+            if((result=searchTokenFromVector(name,_unittoken))!=NULL)
             return result;
+        }
     }
     else
     {
@@ -705,13 +708,13 @@ void addValueToken(const std::string& tokenName,PhyValue value)
     }
 }
 
-void setTokenValue(const std::string& tokenName,PhyValue value)
+void setTokenValue(const std::string& tokenName,PhyValue value,int option=0)
 {
 #ifdef DEBUG
     std::cout << "setTokenValue:" << tokenName << " to " << value << "*****" << std::endl;
 #endif
     AnalyzeToken* tokenSearch;
-    if((tokenSearch=searchToken(tokenName))==NULL)
+    if((tokenSearch=searchToken(tokenName,option))==NULL)
     {
         addValueToken(tokenName,value);
     }
@@ -780,7 +783,7 @@ PhyValue AnalyzeTree::value()
     if(_coperator.c_str()[0]=='=')
     {
         PhyValue val=_contents[0]->value();
-        setTokenValue(_coperator.substr(1,_coperator.length()-1),val);
+        setTokenValue(_coperator.substr(1,_coperator.length()-1),val,1);
         return val;
     }
     if(_coperator=="sin") //function
@@ -956,7 +959,10 @@ AnalyzeTree* makeTree(std::string command)
 #endif
         AnalyzeTree* ats=searchTreeFromToken(cmd2);
         if(ats==NULL)
-            throw compileException("No token hit");
+        {
+            std::string exceptionNotice="No token hit by name:" + cmd2;
+            throw compileException(exceptionNotice);
+        }
         return ats;
     }
 #ifdef DEBUG
